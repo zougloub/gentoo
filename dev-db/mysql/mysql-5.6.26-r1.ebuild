@@ -31,6 +31,11 @@ RDEPEND="${RDEPEND}"
 # disable until we see what happens with it
 MYSQL_CMAKE_NATIVE_DEFINES="-DWITHOUT_VALIDATE_PASSWORD=1"
 
+src_prepare() {
+	epatch "${FILESDIR}"/mysql-5.6.22-libressl.patch
+	mysql-multilib_src_prepare
+}
+
 # Official test instructions:
 # USE='server embedded extraengine perl ssl static-libs community' \
 # FEATURES='test userpriv -usersandbox' \
