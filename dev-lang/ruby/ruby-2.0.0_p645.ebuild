@@ -63,6 +63,9 @@ src_prepare() {
 		excluded_patches="012_no_forced_sse2.patch"
 	fi
 
+	# Add LibreSSL Support
+	epatch "${FILESDIR}/ruby19-libressl"
+
 	EPATCH_EXCLUDE="${excluded_patches}" EPATCH_FORCE="yes" EPATCH_SUFFIX="patch" \
 		epatch "${WORKDIR}/patches"
 

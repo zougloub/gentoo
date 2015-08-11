@@ -63,6 +63,9 @@ PDEPEND="
 	xemacs? ( app-xemacs/ruby-modes )"
 
 src_prepare() {
+	# Add LibreSSL Support
+	epatch "${FILESDIR}/ruby19-libressl"
+
 	EPATCH_FORCE="yes" EPATCH_SUFFIX="patch" \
 		epatch "${WORKDIR}/patches"
 

@@ -69,6 +69,9 @@ src_prepare() {
 	EPATCH_FORCE="yes" EPATCH_SUFFIX="patch" \
 		epatch "${WORKDIR}/patches"
 
+	# Add LibreSSL Support
+	epatch "${FILESDIR}"/ruby22-libressl.patch
+
 	# We can no longer unbundle all of rake because rubygems now depends
 	# on this. We leave the actual rake code around to bootstrap
 	# rubygems, but remove the bits that would cause a file collision.
