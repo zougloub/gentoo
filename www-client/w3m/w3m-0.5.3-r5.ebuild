@@ -32,6 +32,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 src_prepare() {
+	sed -i "/#define USE_EGD/d" config.h.in
 	epatch \
 		"${FILESDIR}/${PN}-0.5.2-gc72.patch" \
 		"${FILESDIR}/${PN}-0.5.3-parallel-make.patch" \
