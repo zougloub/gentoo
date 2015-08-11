@@ -23,7 +23,10 @@ RDEPEND="${DEPEND}"
 
 S=${WORKDIR}/${MY_P}
 
-PATCHES=( "${FILESDIR}/${PN}-openssl-1.0.0.patch" )
+PATCHES=(
+	"${FILESDIR}/${PN}-openssl-1.0.0.patch"
+	"${FILESDIR}/${P}-libressl.patch"
+)
 
 src_configure() {
 	use prefix || EPREFIX=
