@@ -60,6 +60,8 @@ PDEPEND="app-eselect/eselect-python
 S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
+	epatch "${FILESDIR}/python3-randegd.diff"
+
 	# Ensure that internal copies of expat, libffi and zlib are not used.
 	rm -fr Modules/expat
 	rm -fr Modules/_ctypes/libffi*
