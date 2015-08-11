@@ -152,6 +152,7 @@ src_prepare() {
 	cd src
 	epatch "${FILESDIR}/${PN}-1.7.6-cflags.patch"
 	epatch "${FILESDIR}/${PN}-1.7.3.1-mkdir-sandbox.patch"
+	epatch "${FILESDIR}/${PN}-1.7.9-libressl.patch"
 
 	if ! use minimal; then
 		sed -e "s/LDFLAGS  *=  */override LDFLAGS += /" -e "/LDFLAGS/s/-s//" \
