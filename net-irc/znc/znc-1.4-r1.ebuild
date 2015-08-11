@@ -49,6 +49,7 @@ S=${WORKDIR}/${PN}-${MY_PV}
 
 PATCHES=(
 	"${FILESDIR}/${PN}-1.0-systemwideconfig.patch"
+	"${FILESDIR}/${PN}-1.4-libressl.patch"
 )
 
 CONFDIR="/var/lib/znc"
