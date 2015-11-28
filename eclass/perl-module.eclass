@@ -146,7 +146,14 @@ perl-module_src_prepare() {
 perl-module_src_configure() {
 	debug-print-function $FUNCNAME "$@"
 
-	[[ ${SRC_PREP} = yes ]] && return 0
+	case "${EAPI:-0}" in
+		5)
+			[[ ${SRC_PREP} = yes ]] && return 0
+			;;
+		6)
+			[[ ${SRC_PREP} = yes ]] && die "Your ebuild calls configure twice. Please fix this."
+			;;
+	esac
 	SRC_PREP="yes"
 
 	perl_check_env
