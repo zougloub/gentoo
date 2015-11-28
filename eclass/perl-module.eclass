@@ -37,21 +37,55 @@ case "${EAPI:-0}" in
 			RDEPEND="${DEPEND}"
 			;;
 		esac
+
+		case "${PERL_EXPORT_PHASE_FUNCTIONS:-yes}" in
+			yes)
+				EXPORT_FUNCTIONS ${PERL_EXPF}
+				;;
+			no)
+				debug-print "PERL_EXPORT_PHASE_FUNCTIONS=no"
+				;;
+			*)
+				die "PERL_EXPORT_PHASE_FUNCTIONS=${PERL_EXPORT_PHASE_FUNCTIONS} is not supported by perl-module.eclass"
+				;;
+		esac
+		;;
+	6)
+		[[ ${CATEGORY} == "perl-core" ]] && \
+			PERL_EXPF+=" pkg_postinst pkg_postrm"
+
+		case "${GENTOO_DEPEND_ON_PERL:-yes}" in
+		yes)
+			case "${GENTOO_DEPEND_ON_PERL_SUBSLOT:-yes}" in
+			yes)
+				DEPEND="dev-lang/perl:="
+				;;
+			*)
+				DEPEND="dev-lang/perl"
+				;;
+			esac
+			RDEPEND="${DEPEND}"
+			;;
+		esac
+
+		case "${PERL_EXPORT_PHASE_FUNCTIONS:-undefined}" in
+			yes)
+				die "PERL_EXPORT_PHASE_FUNCTIONS is banned in EAPI=6. It defaults to yes anyway."
+				;;
+			no)
+				die "PERL_EXPORT_PHASE_FUNCTIONS is banned in EAPI=6. Inherit perl-functions.eclass instead."
+				;;
+			undefined)
+				;;
+			*)
+				die "PERL_EXPORT_PHASE_FUNCTIONS is banned in EAPI=6."
+				;;
+		esac
+
+		EXPORT_FUNCTIONS ${PERL_EXPF}
 		;;
 	*)
 		die "EAPI=${EAPI} is not supported by perl-module.eclass"
-		;;
-esac
-
-case "${PERL_EXPORT_PHASE_FUNCTIONS:-yes}" in
-	yes)
-		EXPORT_FUNCTIONS ${PERL_EXPF}
-		;;
-	no)
-		debug-print "PERL_EXPORT_PHASE_FUNCTIONS=no"
-		;;
-	*)
-		die "PERL_EXPORT_PHASE_FUNCTIONS=${PERL_EXPORT_PHASE_FUNCTIONS} is not supported by perl-module.eclass"
 		;;
 esac
 
